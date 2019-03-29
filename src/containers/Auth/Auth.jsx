@@ -45,6 +45,18 @@ class Auth extends Component {
     event.preventDefault();
   };
 
+  validateControl(value, validation) {
+    if (!validation) {
+      return true;
+    }
+
+    let isValid = true;
+
+
+
+
+    return isValid;
+  }
 
 
 
