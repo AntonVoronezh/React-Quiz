@@ -60,7 +60,10 @@ class Auth extends Component {
       isValid = is.email(value) && isValid;
     }
 
-
+    if (validation.minLength) {
+      console.log(validation.minLength)
+      isValid = value.length >= validation.minLength && isValid;
+    }
 
     return isValid;
   }
