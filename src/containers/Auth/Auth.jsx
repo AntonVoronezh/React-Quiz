@@ -84,7 +84,10 @@ class Auth extends Component {
       isFormValid = formControls[name].valid && isFormValid;
     });
 
-
+    this.setState({
+      formControls,
+      isFormValid
+    });
   };
 
 
