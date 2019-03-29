@@ -80,6 +80,9 @@ class Auth extends Component {
 
     let isFormValid = true;
 
+    Object.keys(formControls).forEach(name => {
+      isFormValid = formControls[name].valid && isFormValid;
+    });
 
 
   };
