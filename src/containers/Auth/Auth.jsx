@@ -52,6 +52,13 @@ class Auth extends Component {
 
     let isValid = true;
 
+    if (validation.required) {
+      isValid = isValid !== "" && isValid;
+    }
+
+    if (validation.email) {
+      isValid = is.email(value) && isValid;
+    }
 
 
 
