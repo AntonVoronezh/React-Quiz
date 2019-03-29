@@ -117,7 +117,21 @@ class Auth extends Component {
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
 
+            <Button
+              type="success"
+              onClick={this.loginHandler}
+              disabled={!this.state.isFormValid}
+            >
+              войти
+            </Button>
 
+            <Button
+              type="primary"
+              onClick={this.registerHandler}
+              disabled={!this.state.isFormValid}
+            >
+              регистрация
+            </Button>
           </form>
         </div>
       </div>
