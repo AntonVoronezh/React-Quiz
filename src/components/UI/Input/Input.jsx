@@ -12,6 +12,9 @@ const Input = props => {
 
   const htmlFor = `${inputType}-${Math.random()}`;
 
+  if (isInvalid(props)) {
+    cls.push(classes.invalid);
+  }
 
   return (
     <div className={cls.join(" ")}>
