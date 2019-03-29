@@ -100,7 +100,10 @@ class Auth extends Component {
           value={control.value}
           valid={control.valid}
           touched={control.touched}
-
+          label={control.label}
+          errorMessage={control.errorMessage}
+          shouldValidate={!!control.validation}
+          onChange={event => this.onChangeHandler(event, controlName)}
         />
       );
     });
