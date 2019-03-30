@@ -13,5 +13,15 @@
     max-width: 600px;
 }
 
+.QuizCreator h1 {
+    text-align: center;
+}
+
+.QuizCreator form {
+    background: #eee;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+}
 
 
