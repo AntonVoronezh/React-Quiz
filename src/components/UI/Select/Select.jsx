@@ -1,6 +1,9 @@
 import React from "react";
 import classes from "./Select.css";
 
+// function isInvalid({valid, touched, shouldValidate}) {
+//   return !valid && touched && shouldValidate;
+// }
 
 const Select = props => {
   const htmlFor = `${props.label}-${Math.random()}`;
@@ -16,7 +19,7 @@ const Select = props => {
             </option>
           );
         })}
-
+        {/* {isInvalid(props) ? <span>{props.errorMessage}</span> : null} */}
       </select>
     </div>
   );
