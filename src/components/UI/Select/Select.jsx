@@ -9,7 +9,11 @@ const Select = props => {
     <div className={classes.Select}>
       <label htmlFor={htmlFor}>{props.label}</label>
       <select id={htmlFor} value={props.value} onChange={props.onChange}>
+        {props.options.map((option, index) => {
+          return (
 
+          );
+        })}
 
       </select>
     </div>
