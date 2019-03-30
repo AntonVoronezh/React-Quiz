@@ -8,6 +8,8 @@ const Select = props => {
   return (
     <div className={classes.Select}>
       <label htmlFor={htmlFor}>{props.label}</label>
+      <select id={htmlFor} value={props.value} onChange={props.onChange}>
+
 
       </select>
     </div>
