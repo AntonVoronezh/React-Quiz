@@ -8,5 +8,11 @@ export function createControl(config, validation) {
     }
 }
 
+export function validate(value, validation = null){
+    if(!validation) {
+        return true
+    }
 
+
+}
 
