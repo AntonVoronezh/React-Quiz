@@ -22,3 +22,10 @@ export function validate(value, validation = null){
     return isValid
 }
 
+export function validateForm(formControls) {
+    let isFormValid = true
+
+
+
+    return isFormValid
+}
