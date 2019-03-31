@@ -4,6 +4,9 @@ import classes from "./QuizList.css";
 import axios from "axios";
 
 class QuizList extends Component {
+  state = {
+    quizes: []
+  };
 
   renderQuizes() {
     return this.state.quizes.map(quiz => {
