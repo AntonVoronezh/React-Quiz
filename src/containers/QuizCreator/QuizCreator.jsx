@@ -108,15 +108,15 @@ class QuizCreator extends Component {
       await axios.post(
         "https://react-quiz-87fb3.firebaseio.com/quizes.json",
         this.state.quiz
-      )
+      );
       this.setState({
         quiz: [],
         isFormValid: false,
         rightAnswerId: 1,
         formControls: createFormControls()
-      })
+      });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
 
     // axios
