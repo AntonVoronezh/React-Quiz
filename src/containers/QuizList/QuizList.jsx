@@ -27,6 +27,9 @@ class QuizList extends Component {
       const quizes = [];
 
 
+      this.setState({
+        quizes
+      });
     } catch (err) {
       console.log(err);
     }
