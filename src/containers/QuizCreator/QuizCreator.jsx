@@ -104,17 +104,30 @@ class QuizCreator extends Component {
   createQuizHandler = async event => {
     event.preventDefault();
 
-
-
-    axios
-      .post(
+    try {
+      await axios.post(
         "https://react-quiz-87fb3.firebaseio.com/quizes.json",
         this.state.quiz
       )
-      .then(response => {
-        console.log(response);
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls()
       })
-      .catch(err => console.log(err));
+    } catch (err) {
+      console.log(err)
+    }
+
+    // axios
+    //   .post(
+    //     "https://react-quiz-87fb3.firebaseio.com/quizes.json",
+    //     this.state.quiz
+    //   )
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   changeHandler = (value, controlName) => {
