@@ -26,6 +26,12 @@ class QuizList extends Component {
       console.log(responce.data);
       const quizes = [];
 
+      Object.keys(responce.data).forEach((key, index) => {
+        quizes.push({
+          id: key,
+          name: `Тест ${index + 1}`
+        });
+      });
 
       this.setState({
         quizes
