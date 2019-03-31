@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import classes from "./Quiz.css";
 import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz.jsx";
 import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz.jsx";
+import axios from "../../axios/axios-quiz";
+import Loader from "../../components/UI/Loader/Loader.jsx";
 
 class Quiz extends Component {
   state = {
@@ -10,29 +12,30 @@ class Quiz extends Component {
     activeQuestion: 0,
     answerState: null,
     quiz: [
-      {
-        question: "Какого цвета небо?",
-        rightAnswerId: 2,
-        id: 1,
-        answers: [
-          { text: "Чёрный", id: 1 },
-          { text: "Синий", id: 2 },
-          { text: "Красный", id: 3 },
-          { text: "Зелёный", id: 4 }
-        ]
-      },
-      {
-        question: "В каком году основали Питер?",
-        rightAnswerId: 3,
-        id: 2,
-        answers: [
-          { text: "1700", id: 1 },
-          { text: "1702", id: 2 },
-          { text: "1703", id: 3 },
-          { text: "1803", id: 4 }
-        ]
-      }
-    ]
+      // {
+      //   question: "Какого цвета небо?",
+      //   rightAnswerId: 2,
+      //   id: 1,
+      //   answers: [
+      //     { text: "Чёрный", id: 1 },
+      //     { text: "Синий", id: 2 },
+      //     { text: "Красный", id: 3 },
+      //     { text: "Зелёный", id: 4 }
+      //   ]
+      // },
+      // {
+      //   question: "В каком году основали Питер?",
+      //   rightAnswerId: 3,
+      //   id: 2,
+      //   answers: [
+      //     { text: "1700", id: 1 },
+      //     { text: "1702", id: 2 },
+      //     { text: "1703", id: 3 },
+      //     { text: "1803", id: 4 }
+      //   ]
+      // }
+    ],
+    loading: true
   };
 
   onAnswerClickHandler = answerId => {
@@ -93,10 +96,23 @@ class Quiz extends Component {
       isFinished: false,
       results: {}
     });
-  }
+  };
 
-  componentDidMount() {
-    console.log('componentDidMount ID ', this.props.match.params.id)
+  async componentDidMount() {
+    // console.log('componentDidMount ID ', this.props.match.params.id)
+    try {
+      const response = await axios.get(
+        `quizes/${this.props.match.params.id}.json`
+      );
+      const quiz = response.data;
+
+      this.setState({
+        quiz,
+        loading: false
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -104,8 +120,11 @@ class Quiz extends Component {
       <div className={classes.Quiz}>
         <div className={classes.QiuzWrapper}>
           <h1>Ответьте на все вопросы</h1>
-          {this.state.isFinished ? (
-            <FinishedQuiz 
+
+          {this.state.loading ? (
+            <Loader />
+          ) : this.state.isFinished ? (
+            <FinishedQuiz
               results={this.state.results}
               quiz={this.state.quiz}
               onRetry={this.retryHandler}
