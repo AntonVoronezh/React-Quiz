@@ -20,6 +20,11 @@ class QuizList extends Component {
 
   async componentDidMount() {
     try {
+      const responce = await axios.get(
+        "https://react-quiz-87fb3.firebaseio.com/quizes.json"
+      );
+      console.log(responce.data);
+      const quizes = [];
 
 
     } catch (err) {
