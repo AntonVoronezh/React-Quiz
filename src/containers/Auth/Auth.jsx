@@ -3,7 +3,8 @@ import classes from "./Auth.css";
 import Button from "../../components/UI/Button/Button.jsx";
 import Input from "../../components/UI/Input/Input.jsx";
 import is from "is_js";
-import axios from "axios";
+import { connect } from "react-redux";
+import {auth} from '../../store/actions/auth';
 
 class Auth extends Component {
   state = {
@@ -36,40 +37,33 @@ class Auth extends Component {
     }
   };
 
-  loginHandler = async () => {
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true
-    };
+  loginHandler = () => {
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      true
+    );
 
-    try {
-      const response = await axios.post(
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDRhzVD6i2gcWbwYacYeUzB19zXood7wLE",
-        authData
-      );
-      console.log(response.data)
-    } catch (err) {
-      console.log(err);
+  //   try {
+  //     const response = await axios.post(
+  //       "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDRhzVD6i2gcWbwYacYeUzB19zXood7wLE",
+  //       authData
+  //     );
+  //     console.log(response.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
     }
-  };
 
-  registerHandler = async () => {
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true
-    };
+  registerHandler = () => {
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      false
+    );
 
-    try {
-      const response = await axios.post(
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDRhzVD6i2gcWbwYacYeUzB19zXood7wLE",
-        authData
-      );
-      console.log(response.data)
-    } catch (err) {
-      console.log(err);
-    }
+
   };
 
   submitHandler = event => {
@@ -169,4 +163,13 @@ class Auth extends Component {
   }
 }
 
-export default Auth;
+function mapDispatchToProps(dispatch) {
+  return {
+    auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Auth);
