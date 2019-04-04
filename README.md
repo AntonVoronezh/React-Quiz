@@ -1,7 +1,7 @@
 # React-Quiz
 
 
-[Посмотреть проект (вживую)](https://js-blog-4fbb4.firebaseapp.com/)
+[Посмотреть проект (вживую)](https://react-quiz-87fb3.firebaseapp.com/)
 
 
 
