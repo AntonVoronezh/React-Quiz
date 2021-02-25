@@ -1,14 +1,16 @@
 import React, { Component } from "react";
-import classes from "./Quiz.css";
-import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz.jsx";
-import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz.jsx";
-import Loader from "../../components/UI/Loader/Loader.jsx";
 import { connect } from "react-redux";
+
+import classes from "./Quiz.css";
+
 import {
   fetchQuizById,
   quizAnswerClick,
-  retryQuiz
+  retryQuiz,
 } from "../../store/actions/quiz";
+import { Loader } from "../../components/UI/Loader/Loader";
+import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
+import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
 
 class Quiz extends Component {
   componentDidMount() {
@@ -56,19 +58,16 @@ function mapStateToProps(state) {
     activeQuestion: state.quiz.activeQuestion,
     answerState: state.quiz.answerState,
     quiz: state.quiz.quiz,
-    loading: state.quiz.loading
+    loading: state.quiz.loading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchQuizById: id => dispatch(fetchQuizById(id)),
-    quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId)),
-    retryQuiz: () => dispatch(retryQuiz())
+    fetchQuizById: (id) => dispatch(fetchQuizById(id)),
+    quizAnswerClick: (answerId) => dispatch(quizAnswerClick(answerId)),
+    retryQuiz: () => dispatch(retryQuiz()),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Quiz);
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
