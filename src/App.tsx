@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import Layout from "./hoc/Layout/Layout.jsx";
-import Quiz from "./containers/Quiz/Quiz.jsx";
-import Auth from "./containers/Auth/Auth.jsx";
-import QuizCreator from "./containers/QuizCreator/QuizCreator.jsx";
-import QuizList from "./containers/QuizList/QuizList.jsx";
-import Logout from "./components/Logout/Logout.jsx";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import {autoLogin} from './store/actions/auth'
+
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { autoLogin } from "./store/actions/auth";
+import { Logout } from "./components/Logout/Logout";
+import Auth from "./containers/Auth/Auth";
+import Quiz from "./containers/Quiz/Quiz";
+import QuizList from "./containers/QuizList/QuizList";
+import QuizCreator from "./containers/QuizCreator/QuizCreator";
+import Layout from "./hoc/Layout/Layout";
 
 class App extends Component {
   componentDidMount() {
@@ -42,13 +43,13 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.auth.token
+    isAuthenticated: !!state.auth.token,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    autoLogin: () => dispatch(autoLogin())
+    autoLogin: () => dispatch(autoLogin()),
   };
 }
 
