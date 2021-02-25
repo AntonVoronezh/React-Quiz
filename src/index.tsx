@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App.jsx";
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
-import { createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import rootReducer from "./store/reducers/rootReducer";
+import { createStore, compose, applyMiddleware } from "redux";
+import { BrowserRouter } from "react-router-dom";
 import thank from 'redux-thunk';
+
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
+import rootReducer from "./store/reducers/rootReducer";
+import App from "./App";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
