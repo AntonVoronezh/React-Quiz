@@ -2,7 +2,12 @@ import React from "react";
 
 import classes from "./MenuToggle.css";
 
-export const MenuToggle = (props) => {
+interface IProps {
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+export const MenuToggle = (props: IProps): JSX.Element => {
   const cls = [classes.MenuToggle, "fa"];
 
   if (props.isOpen) {
