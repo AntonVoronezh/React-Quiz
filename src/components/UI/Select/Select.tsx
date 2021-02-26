@@ -2,7 +2,19 @@ import React from "react";
 
 import classes from "./Select.css";
 
-export const Select = (props) => {
+interface IProps {
+  label: string;
+  value: string;
+  onChange: () => void;
+  options: IOptions[];
+}
+
+export interface IOptions {
+  value: string;
+  text: string;
+}
+
+export const Select = (props: IProps): JSX.Element => {
   const htmlFor = `${props.label}-${Math.random()}`;
 
   return (
@@ -16,7 +28,6 @@ export const Select = (props) => {
             </option>
           );
         })}
-        {/* {isInvalid(props) ? <span>{props.errorMessage}</span> : null} */}
       </select>
     </div>
   );

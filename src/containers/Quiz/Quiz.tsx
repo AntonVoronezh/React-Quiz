@@ -9,15 +9,31 @@ import {
   retryQuiz,
 } from "../../store/actions/quiz";
 import { Loader } from "../../components/UI/Loader/Loader";
-import FinishedQuiz from "../../components/FinishedQuiz/FinishedQuiz";
-import ActiveQuiz from "../../components/ActiveQuiz/ActiveQuiz";
+import {
+  FinishedQuiz,
+  IQuiz,
+} from "../../components/FinishedQuiz/FinishedQuiz";
+import { ActiveQuiz } from "../../components/ActiveQuiz/ActiveQuiz";
 
-class Quiz extends Component {
-  componentDidMount() {
+interface IProps {
+  fetchQuizById: (i: number) => void;
+  match: any;
+  retryQuiz: () => void;
+  isFinished: boolean;
+  loading: boolean;
+  quiz: IQuiz[];
+  results: string;
+  activeQuestion: number;
+  quizAnswerClick: (id: number) => void;
+  answerState: any;
+}
+
+class Quiz extends Component<IProps> {
+  componentDidMount(): void {
     this.props.fetchQuizById(this.props.match.params.id);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.props.retryQuiz();
   }
 
