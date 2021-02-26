@@ -2,8 +2,18 @@ import React from "react";
 
 import classes from "./ActiveQuiz.css";
 import { AnswersList } from "./AnswersList/AnswersList";
+import { IAnswer } from "./AnswersList/AnswerItem/AnswerItem";
 
-const ActiveQuiz = (props) => (
+interface IProps {
+  answerNumber: number;
+  onAnswerClick: (id: number) => void;
+  quizLenght: number;
+  answers: IAnswer[];
+  state: any;
+  question: string;
+}
+
+export const ActiveQuiz = (props: IProps): JSX.Element => (
   <div className={classes.ActiveQuiz}>
     <p className={classes.Question}>
       <span>
@@ -20,5 +30,3 @@ const ActiveQuiz = (props) => (
     />
   </div>
 );
-
-export default ActiveQuiz;

@@ -1,11 +1,17 @@
 import React from "react";
 
 import classes from "./AnswersList.css";
-import { AnswerItem } from "./AnswerItem/AnswerItem";
+import { AnswerItem, IAnswer } from "./AnswerItem/AnswerItem";
 
-export const AnswersList = (props) => (
+interface IProps {
+  answers: IAnswer[];
+  onAnswerClick: (id: number) => void;
+  state?: string;
+}
+
+export const AnswersList = (props: IProps): JSX.Element => (
   <ul className={classes.AnswersList}>
-    {props.answers.map((answer, index) => {
+    {props.answers.map((answer: IAnswer, index) => {
       return (
         <AnswerItem
           answer={answer}
