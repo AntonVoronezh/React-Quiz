@@ -4,8 +4,12 @@ import { Redirect } from "react-router-dom";
 
 import { logout } from "../../store/actions/auth";
 
-class LogoutComp extends Component {
-  componentDidMount() {
+interface IProps {
+  logout: () => void;
+}
+
+class LogoutComp extends Component<IProps> {
+  componentDidMount(): void {
     this.props.logout();
   }
 
