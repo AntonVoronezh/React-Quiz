@@ -2,7 +2,14 @@ import React from "react";
 
 import classes from "./Button.css";
 
-export const Button = (props) => {
+interface IProps {
+  type: string;
+  onClick: () => void;
+  children: any;
+  disabled: boolean;
+}
+
+export const Button = (props: IProps): JSX.Element => {
   const cls = [classes.Button, classes[props.type]];
 
   return (

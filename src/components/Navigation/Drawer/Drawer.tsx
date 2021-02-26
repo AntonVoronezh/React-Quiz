@@ -4,10 +4,16 @@ import { NavLink } from "react-router-dom";
 import classes from "./Drawer.css";
 import { Backdrop } from "../../UI/Backdrop/Backdrop";
 
-class Drawer extends Component {
-  clickHandler = () => this.props.onClose();
+interface IProps {
+  onClose: () => void;
+  isOpen: boolean;
+  isAuthenticated: boolean;
+}
 
-  renderLinks(links) {
+class Drawer extends Component<IProps> {
+  clickHandler = (): void => this.props.onClose();
+
+  renderLinks(links): string {
     return links.map((link, index) => {
       return (
         <li key={index}>
