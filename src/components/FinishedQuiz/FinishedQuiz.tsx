@@ -4,8 +4,21 @@ import { Link } from "react-router-dom";
 import { Button } from "../UI/Button/Button";
 import classes from "./FinishedQuiz.css";
 
+interface IProps {
+    results: string;
+    quiz:IQuiz[];
+    onRetry: () => void;
+}
 
-const FinishedQuiz = (props) => {
+export interface IQuiz {
+    id: number;
+    length: number;
+    question: string;
+    answers?: any;
+}
+
+
+export const FinishedQuiz = (props: IProps): JSX.Element => {
   const successCount = Object.keys(props.results).reduce((total, key) => {
     if (props.results[key] === "success") {
       total++;
@@ -46,5 +59,3 @@ const FinishedQuiz = (props) => {
     </div>
   );
 };
-
-export default FinishedQuiz;

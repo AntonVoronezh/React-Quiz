@@ -2,11 +2,22 @@ import React from "react";
 
 import classes from "./Input.css";
 
-function isInvalid({ valid, touched, shouldValidate }) {
+function isInvalid({ valid, touched, shouldValidate }): boolean {
   return !valid && touched && shouldValidate;
 }
 
-export const Input = (props) => {
+interface IProps {
+  type: string;
+  valid: boolean;
+  touched: boolean;
+  shouldValidate: boolean;
+  label: string;
+  value: string;
+  errorMessage: string;
+  onChange: (event: any) => void;
+}
+
+export const Input = (props: IProps): JSX.Element => {
   const inputType = props.type || "text";
 
   const cls = [classes.Input];
