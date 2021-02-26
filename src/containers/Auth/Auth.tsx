@@ -3,12 +3,25 @@ import { connect } from "react-redux";
 import is from "is_js";
 
 import * as classes from "./Auth.css";
-
 import { auth } from "../../store/actions/auth";
 import { Button } from "../../components/UI/Button/Button";
 import { Input } from "../../components/UI/Input/Input";
 
-class Auth extends Component {
+interface IProps {
+  auth: (a: string, v: string, b: boolean) => void;
+}
+
+interface IState {
+  isFormValid: boolean;
+  formControls: IFormControls;
+}
+
+interface IFormControls {
+  email: any;
+  password: any;
+}
+
+class Auth extends Component<IProps, IState> {
   state = {
     isFormValid: false,
     formControls: {
@@ -39,26 +52,15 @@ class Auth extends Component {
     },
   };
 
-  loginHandler = () => {
+  loginHandler = (): void => {
     this.props.auth(
       this.state.formControls.email.value,
       this.state.formControls.password.value,
       true
     );
-
-    //   try {
-    //     const response = await axios.post(
-    //       "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDRhzVD6i2gcWbwYacYeUzB19zXood7wLE",
-    //       authData
-    //     );
-    //     console.log(response.data);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
   };
 
-  registerHandler = () => {
+  registerHandler = (): void => {
     this.props.auth(
       this.state.formControls.email.value,
       this.state.formControls.password.value,
@@ -66,11 +68,11 @@ class Auth extends Component {
     );
   };
 
-  submitHandler = (event) => {
+  submitHandler = (event: React.SyntheticEvent<EventTarget>): void => {
     event.preventDefault();
   };
 
-  validateControl(value, validation) {
+  validateControl(value, validation): boolean {
     if (!validation) {
       return true;
     }
@@ -92,7 +94,7 @@ class Auth extends Component {
     return isValid;
   }
 
-  onChangeHandler = (event, controlName) => {
+  onChangeHandler = (event: any, controlName: string): void => {
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[controlName] };
 
@@ -114,7 +116,7 @@ class Auth extends Component {
     });
   };
 
-  renderInputs() {
+  renderInputs(): JSX.Element[] {
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
       return (
