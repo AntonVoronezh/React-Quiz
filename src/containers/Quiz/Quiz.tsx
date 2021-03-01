@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+// @ts-ignore
 import classes from "./Quiz.css";
 
 import {
