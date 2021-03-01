@@ -1,5 +1,6 @@
 import React from "react";
 
+// @ts-ignore
 import classes from "./ActiveQuiz.css";
 import { AnswersList } from "./AnswersList/AnswersList";
 import { IAnswer } from "./AnswersList/AnswerItem/AnswerItem";
