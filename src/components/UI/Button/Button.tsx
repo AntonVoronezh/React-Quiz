@@ -1,12 +1,13 @@
 import React from "react";
 
+// @ts-ignore
 import classes from "./Button.css";
 
 interface IProps {
   type: string;
-  onClick: () => void;
+  onClick?: (event?: any) => void;
   children: any;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const Button = (props: IProps): JSX.Element => {

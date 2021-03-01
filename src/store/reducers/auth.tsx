@@ -4,7 +4,7 @@ const initialState = {
   token: null,
 };
 
-export default function authReducer(state = initialState, action) {
+export default function authReducer(state = initialState, action: any): { token: any } {
   switch (action.type) {
     case AUTH_SUCCESS:
       return {
