@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
+// @ts-ignore
 import classes from "./QuizList.css";
 import { fetchQuizes } from "../../store/actions/quiz";
-import {Loader} from "../../components/UI/Loader/Loader";
+import { Loader } from "../../components/UI/Loader/Loader";
 
-class QuizList extends Component {
+interface IProps {
+  quizes: any[];
+  fetchQuizes: () => void;
+  loading: boolean;
+}
+
+class QuizList extends Component<IProps> {
   renderQuizes() {
-    return this.props.quizes.map(quiz => {
+    return this.props.quizes.map((quiz) => {
       return (
         <li key={quiz.id}>
           <NavLink to={"/quiz/" + quiz.id}> {quiz.name}</NavLink>
@@ -26,11 +33,15 @@ class QuizList extends Component {
       <div className={classes.QuizList}>
         <div>
           <h1>Список тестов</h1>
-          {this.props.loading && this.props.quizes !== 0 ? (
-            <Loader />
-          ) : (
-            <ul>{this.renderQuizes()}</ul>
-          )}
+
+          {
+            // @ts-ignore
+            this.props.loading && this.props.quizes !== 0 ? (
+              <Loader />
+            ) : (
+              <ul>{this.renderQuizes()}</ul>
+            )
+          }
         </div>
       </div>
     );
@@ -40,17 +51,14 @@ class QuizList extends Component {
 function mapStateToProps(state) {
   return {
     quizes: state.quiz.quizes,
-    loading: state.quiz.loading
+    loading: state.quiz.loading,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchQuizes: () => dispatch(fetchQuizes())
+    fetchQuizes: () => dispatch(fetchQuizes()),
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(QuizList);
+export default connect(mapStateToProps, mapDispatchToProps)(QuizList);

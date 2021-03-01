@@ -10,18 +10,19 @@ import {
   QUIZ_RETRY,
 } from "./actionTypes";
 
-export function fetchQuizes() {
+export function fetchQuizes(): (dispatch) => Promise<void> {
   return async (dispatch) => {
     dispatch(fetchQuizesStart());
 
     try {
       const responce = await axios.get("quizes.json");
-      console.log(responce.data);
       const quizes = [];
 
       Object.keys(responce.data).forEach((key, index) => {
         quizes.push({
+          // @ts-ignore
           id: key,
+          // @ts-ignore
           name: `Тест ${index + 1}`,
         });
       });
@@ -33,27 +34,27 @@ export function fetchQuizes() {
   };
 }
 
-export function fetchQuizesStart() {
+export function fetchQuizesStart(): { type: string } {
   return {
     type: FETCH_QUIZES_START,
   };
 }
 
-export function fetchQuizesSuccess(quizes) {
+export function fetchQuizesSuccess(quizes): { quizes: any; type: string } {
   return {
     type: FETCH_QUIZES_SUCCESS,
     quizes,
   };
 }
 
-export function fetchQuizesError(err) {
+export function fetchQuizesError(err: any): { errror: any; type: string } {
   return {
     type: FETCH_QUIZES_ERROR,
     errror: err,
   };
 }
 
-export function fetchQuizById(quizId) {
+export function fetchQuizById(quizId: any): (dispatch) => Promise<void> {
   return async (dispatch) => {
     dispatch(fetchQuizesStart());
 
@@ -68,14 +69,17 @@ export function fetchQuizById(quizId) {
   };
 }
 
-export function fetchQuizSuccess(quiz) {
+export function fetchQuizSuccess(quiz: string): { quiz: any; type: string } {
   return {
     type: FETCH_QUIZ_SUCCESS,
     quiz,
   };
 }
 
-export function quizSetState(answerState, results) {
+export function quizSetState(
+  answerState: any,
+  results: any
+): { answerState: any; type: string; results: any } {
   return {
     type: QUIZ_SET_STATE,
     answerState,
@@ -83,30 +87,30 @@ export function quizSetState(answerState, results) {
   };
 }
 
-export function finishQuiz() {
+export function finishQuiz(): { type: string } {
   return {
     type: FINISH_QUIZ,
   };
 }
 
-export function quizNextQuestion(number) {
+export function quizNextQuestion(number: any): { number: any; type: string } {
   return {
     type: QUIZ_NEXT_QUESTION,
     number,
   };
 }
 
-function isQuizFinished(state) {
+function isQuizFinished(state: any): boolean {
   return state.activeQuestion + 1 === state.quiz.length;
 }
 
-export function retryQuiz() {
+export function retryQuiz(): { type: string } {
   return {
     type: QUIZ_RETRY,
   };
 }
 
-export function quizAnswerClick(answerId) {
+export function quizAnswerClick(answerId: any): (dispatch, getState) => any {
   return (dispatch, getState) => {
     const state = getState().quiz;
 

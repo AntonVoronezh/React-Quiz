@@ -20,7 +20,19 @@ const initialState = {
   quiz: null,
 };
 
-export default function quizReducer(state = initialState, action) {
+export default function quizReducer(
+  state = initialState,
+  action: any
+): {
+  quiz: null;
+  quizes: any[];
+  answerState: null;
+  activeQuestion: number;
+  loading: boolean;
+  error: null;
+  isFinished: boolean;
+  results: {};
+} {
   switch (action.type) {
     case FETCH_QUIZES_START:
       return {

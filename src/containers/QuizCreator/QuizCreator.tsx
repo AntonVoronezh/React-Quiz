@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+// @ts-ignore
 import classes from "./QuizCreator.css";
 import { Button } from "../../components/UI/Button/Button";
 import { Input } from "../../components/UI/Input/Input";
@@ -8,7 +9,9 @@ import {
   createControl,
   validate,
   validateForm,
+  // @ts-ignore
 } from "../../form/formFramework.tsx";
+// @ts-ignore
 import Auxiliary from "../../hoc/Auxiliary/Auxiliary.tsx";
 import {
   createQuizQuestion,
@@ -16,7 +19,7 @@ import {
 } from "../../store/actions/create";
 import { Select } from "../../components/UI/Select/Select";
 
-function createOptionControl(number) {
+function createOptionControl(number): any {
   return createControl(
     {
       label: `Вариант ${number}`,
@@ -29,7 +32,19 @@ function createOptionControl(number) {
   );
 }
 
-function createFormControls() {
+interface IA {
+  text?: string | number;
+  id?: string | number;
+  value?: string | number;
+}
+
+function createFormControls(): {
+  question: any;
+  option3: IA;
+  option4: IA;
+  option1: IA;
+  option2: IA;
+} {
   return {
     question: createControl(
       {
@@ -47,18 +62,30 @@ function createFormControls() {
   };
 }
 
-class QuizCreator extends Component {
+interface IProps {
+  quiz: any;
+  createQuizQuestion: (i: any) => void;
+  finishCreateQuiz: () => void;
+}
+
+interface IState {
+  isFormValid: boolean;
+  rightAnswerId: number | string;
+  formControls: any;
+}
+
+class QuizCreator extends Component<IProps, IState> {
   state = {
     isFormValid: false,
     rightAnswerId: 1,
     formControls: createFormControls(),
   };
 
-  submitHandlerd = (event) => {
+  submitHandlerd = (event): void => {
     event.preventDefault();
   };
 
-  addQuestionHandler = (event) => {
+  addQuestionHandler = (event): void => {
     event.preventDefault();
 
     const {
@@ -137,10 +164,11 @@ class QuizCreator extends Component {
       return (
         <Auxiliary key={controlName + index}>
           <Input
+            type="text"
             label={control.label}
             value={control.value}
             valid={control.valid}
-            showldValidate={!!control.validation}
+            shouldValidate={!!control.validation}
             touched={control.touched}
             errorMessage={control.errorMessage}
             onChange={(event) =>
@@ -153,7 +181,7 @@ class QuizCreator extends Component {
     });
   }
 
-  selectChangeHandler = (event) => {
+  selectChangeHandler = (event): void => {
     this.setState({
       rightAnswerId: +event.target.value,
     });
