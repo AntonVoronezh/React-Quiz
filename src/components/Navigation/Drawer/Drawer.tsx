@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
+// @ts-ignore
 import classes from "./Drawer.css";
 import { Backdrop } from "../../UI/Backdrop/Backdrop";
 
