@@ -1,5 +1,6 @@
 import React from "react";
 
+// @ts-ignore
 import classes from "./Input.css";
 
 function isInvalid({ valid, touched, shouldValidate }): boolean {

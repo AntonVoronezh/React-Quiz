@@ -11,10 +11,12 @@ import rootReducer from "./store/reducers/rootReducer";
 import App from "./App";
 
 const composeEnhancers =
+    // @ts-ignore
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      // @ts-ignore
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
-
+// (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thank)));
 
 const application = (

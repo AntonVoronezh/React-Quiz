@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Button } from "../UI/Button/Button";
+// @ts-ignore
 import classes from "./FinishedQuiz.css";
 
 interface IProps {
@@ -49,7 +50,7 @@ export const FinishedQuiz = (props: IProps): JSX.Element => {
         Правильно {successCount} из {props.quiz.length}
       </p>
       <div>
-        <Button onClick={props.onRetry} type="primary">
+        <Button onClick={props.onRetry} type="primary" disabled>
           повторить
         </Button>
         <Link to="/">
