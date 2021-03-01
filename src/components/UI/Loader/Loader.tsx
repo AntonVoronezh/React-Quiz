@@ -1,5 +1,6 @@
 import React from "react";
 
+// @ts-ignore
 import classes from "./Loader.css";
 
 export const Loader = (): JSX.Element => (

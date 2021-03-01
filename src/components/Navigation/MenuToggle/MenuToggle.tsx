@@ -1,5 +1,6 @@
 import React from "react";
 
+// @ts-ignore
 import classes from "./MenuToggle.css";
 
 interface IProps {

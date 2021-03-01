@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+// @ts-ignore
 import classes from "./Layout.css";
 import { MenuToggle } from "../../components/Navigation/MenuToggle/MenuToggle";
 import Drawer from "../../components/Navigation/Drawer/Drawer";
 
-class Layout extends Component {
+interface IProps {
+  isAuthenticated: boolean;
+}
+
+class Layout extends Component<IProps> {
   state = {
     menu: false,
   };
