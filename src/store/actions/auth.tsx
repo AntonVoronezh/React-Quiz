@@ -2,7 +2,11 @@ import axios from "axios";
 
 import { AUTH_SUCCESS, AUTH_LOGOUT } from "./actionTypes";
 
-export function auth(email, password, isLogin) {
+export function auth(
+  email: string,
+  password: string,
+  isLogin: boolean
+): (dispatch) => Promise<void> {
   return async (dispatch) => {
     const authData = {
       email,
@@ -27,14 +31,14 @@ export function auth(email, password, isLogin) {
 
     localStorage.setItem("token", data.idToken);
     localStorage.setItem("userId", data.localId);
-    localStorage.setItem("expirationDate", expirationDate);
+    localStorage.setItem("expirationDate", JSON.stringify(expirationDate));
 
     dispatch(authSuccess(data.idToken));
     dispatch(autoLogout(data.expiresIn));
   };
 }
 
-export function autoLogout(time) {
+export function autoLogout(time: any): (dispatch) => void {
   return (dispatch) => {
     setTimeout(() => {
       dispatch(logout());
@@ -42,7 +46,7 @@ export function autoLogout(time) {
   };
 }
 
-export function logout() {
+export function logout(): { type: string } {
   localStorage.removeItem("token");
   localStorage.removeItem("userId");
   localStorage.removeItem("expirationDate");
@@ -52,13 +56,17 @@ export function logout() {
   };
 }
 
-export function autoLogin() {
+export function autoLogin(): (dispatch) => void {
   return (dispatch) => {
     const token = localStorage.getItem("token");
     if (!token) {
       dispatch(logout());
     } else {
-      const expirationDate = new Date(localStorage.getItem("expirationDate"));
+      const expirationDate = new Date(
+        JSON.parse(
+          localStorage.getItem("expirationDate") || new Date().toString()
+        )
+      );
       if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
@@ -71,7 +79,7 @@ export function autoLogin() {
   };
 }
 
-export function authSuccess(token) {
+export function authSuccess(token: string): { type: string; token: string } {
   return {
     type: AUTH_SUCCESS,
     token,

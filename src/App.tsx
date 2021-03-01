@@ -10,7 +10,12 @@ import QuizList from "./containers/QuizList/QuizList";
 import QuizCreator from "./containers/QuizCreator/QuizCreator";
 import Layout from "./hoc/Layout/Layout";
 
-class App extends Component {
+interface IProps {
+  autoLogin: () => void;
+  isAuthenticated: boolean;
+}
+
+class App extends Component<IProps> {
   componentDidMount() {
     this.props.autoLogin();
   }
@@ -41,13 +46,13 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any): { isAuthenticated: boolean } {
   return {
     isAuthenticated: !!state.auth.token,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any): { autoLogin: () => any } {
   return {
     autoLogin: () => dispatch(autoLogin()),
   };

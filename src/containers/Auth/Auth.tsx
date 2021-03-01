@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import is from "is_js";
 
+// @ts-ignore
 import * as classes from "./Auth.css";
 import { auth } from "../../store/actions/auth";
 import { Button } from "../../components/UI/Button/Button";
@@ -80,6 +81,7 @@ class Auth extends Component<IProps, IState> {
     let isValid = true;
 
     if (validation.required) {
+      // @ts-ignore
       isValid = isValid !== "" && isValid;
     }
 
