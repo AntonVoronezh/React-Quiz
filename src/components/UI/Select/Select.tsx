@@ -1,17 +1,18 @@
 import React from "react";
 
+// @ts-ignore
 import classes from "./Select.css";
 
 interface IProps {
   label: string;
-  value: string;
-  onChange: () => void;
+  value: string | number;
+  onChange: (event?: any) => void;
   options: IOptions[];
 }
 
 export interface IOptions {
-  value: string;
-  text: string;
+  value: string | number;
+  text: string | number;
 }
 
 export const Select = (props: IProps): JSX.Element => {
@@ -23,7 +24,7 @@ export const Select = (props: IProps): JSX.Element => {
       <select id={htmlFor} value={props.value} onChange={props.onChange}>
         {props.options.map((option, index) => {
           return (
-            <option value={option.value} key={option.value + index}>
+            <option value={option.value} key={option.value.toString() + index}>
               {option.text}
             </option>
           );
